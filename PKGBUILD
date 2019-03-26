@@ -11,17 +11,23 @@ url="http://dwm.suckless.org"
 arch=('i686' 'x86_64')
 license=('MIT')
 options=(zipman)
-depends=('libx11' 'libxinerama' 'libxft' 'freetype2' 'st' 'dmenu')
+depends=('libx11' 'libxinerama' 'libxft' 'freetype2' 'rofi')
 install=dwm.install
 source=(http://dl.suckless.org/dwm/dwm-$pkgver.tar.gz
+	dwm.desktop
 	config.h
-	dwm.desktop)
+	dwm-attachbottom-6.1.diff
+    dwm-noborder-6.1.diff)
 md5sums=('f0b6b1093b7207f89c2a90b848c008ec'
-         '80c4ef2a3eca0fe2d14e2203e3833200'
-         '939f403a71b6e85261d09fc3412269ee')
+         '939f403a71b6e85261d09fc3412269ee'
+         'SKIP'
+         'SKIP'
+         'SKIP')
 
 prepare() {
   cd $srcdir/$pkgname-$pkgver
+  patch -p1 -i ../dwm-attachbottom-6.1.diff
+  patch -p1 -i ../dwm-noborder-6.1.diff
   cp $srcdir/config.h config.h
 }
 
